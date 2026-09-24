@@ -1,0 +1,11 @@
+.progress-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.progress-indicator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

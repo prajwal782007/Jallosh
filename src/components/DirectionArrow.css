@@ -1,0 +1,74 @@
+.direction-arrow {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(108, 60, 225, 0.85);
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.direction-arrow:hover {
+  background: rgba(108, 60, 225, 0.95);
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 0 24px rgba(108, 60, 225, 0.5);
+}
+
+.direction-arrow:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.direction-arrow-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.direction-arrow-icon {
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+/* Pulse ring */
+.direction-arrow-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(108, 60, 225, 0.4);
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Mobile: slightly larger tap target */
+@media (max-width: 480px) {
+  .direction-arrow {
+    width: 56px;
+    height: 56px;
+  }
+
+  .direction-arrow-icon {
+    font-size: 1.3rem;
+  }
+}

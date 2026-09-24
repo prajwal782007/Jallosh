@@ -1,0 +1,46 @@
+.instruction-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.instruction-text {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.instruction-description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Floor-change callout */
+.instruction-card-floor-change {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.instruction-floor-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.instruction-floor-badge-icon {
+  font-size: 1.25rem;
+}
+
+.instruction-floor-badge-text {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

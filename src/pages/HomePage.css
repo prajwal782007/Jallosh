@@ -1,0 +1,111 @@
+/* ── Home Page ──────────────────────────────────────────────── */
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  padding-top: var(--space-3xl);
+  justify-content: center;
+}
+
+/* Hero */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.home-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.home-title {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+}
+
+.home-title-year {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  -webkit-text-fill-color: var(--color-text-muted);
+}
+
+.home-tagline {
+  color: var(--color-text);
+}
+
+.home-description {
+  max-width: 320px;
+}
+
+.home-cta {
+  margin-top: var(--space-md);
+}
+
+/* How it works */
+.home-how {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.home-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+.home-step-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(108, 60, 225, 0.12);
+  color: var(--color-primary-light);
+}
+
+.home-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.home-step-divider {
+  width: 2px;
+  height: 16px;
+  background: var(--color-border);
+  margin-left: 21px;
+}
+
+@media (min-width: 768px) {
+  .home-title {
+    font-size: 3.5rem;
+  }
+}

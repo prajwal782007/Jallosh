@@ -1,0 +1,192 @@
+/* ── Navigation Page ────────────────────────────────────────── */
+
+.nav-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-bottom: var(--space-lg);
+}
+
+/* Top bar */
+.nav-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-xs);
+}
+
+.nav-topbar-location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+}
+
+.nav-topbar-building {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.nav-topbar-floor {
+  color: var(--color-text-muted);
+}
+
+/* Photo wrapper */
+.nav-photo-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Controls */
+.nav-controls {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.nav-control-prev {
+  flex: 0 0 auto;
+  min-width: 100px;
+}
+
+.nav-control-next {
+  flex: 1;
+}
+
+.nav-control-prev:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Error */
+.nav-error {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Exit modal */
+.nav-exit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.nav-exit-modal {
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+  animation: modalIn 200ms ease both;
+}
+
+.nav-exit-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.nav-exit-actions .btn {
+  flex: 1;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Loading */
+.nav-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-3xl) var(--space-md);
+  min-height: 50dvh;
+}
+
+.nav-spinner {
+  animation: spin 1s linear infinite;
+  color: var(--color-primary-light);
+}
+
+/* Perspective Arrows overlay on the image */
+.perspective-arrows-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Let clicks pass through except for the arrows */
+  z-index: 10;
+}
+
+.perspective-arrow {
+  pointer-events: auto;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.perspective-arrow:active {
+  transform: translateX(-50%) scale(0.9) !important;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.perspective-arrow svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.arrow-forward {
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%) perspective(600px) rotateX(45deg);
+  width: 72px;
+  height: 72px;
+}
+.arrow-forward:hover {
+  transform: translateX(-50%) perspective(600px) rotateX(35deg) scale(1.1);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.arrow-backward {
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%) perspective(600px) rotateX(-45deg);
+  width: 48px;
+  height: 48px;
+  opacity: 0.8;
+}
+.arrow-backward:hover {
+  transform: translateX(-50%) perspective(600px) rotateX(-35deg) scale(1.1);
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+}
+
+/* Removed obsolete wrapper animations */
