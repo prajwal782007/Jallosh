@@ -704,9 +704,15 @@
             }
 
             async init() {
-                this.state.allEvents = this.mockData.allEvents;
-                this.state.filteredEvents = this.mockData.allEvents;
-                this.render();
+                try {
+                    const response = await fetch('/api/events/all');
+                    const data = await response.json();
+                    this.state.allEvents = data.events;
+                    this.state.filteredEvents = data.events;
+                    this.render();
+                } catch (error) {
+                    console.error('Failed to load events:', error);
+                }
             }
 
             setState(updates) {
@@ -732,22 +738,31 @@
                 });
             }
 
-            searchEvents(query) {
-                const filtered = this.state.allEvents.filter(e =>
-                    e.name.toLowerCase().includes(query.toLowerCase())
-                );
-                this.setState({
-                    searchQuery: query,
-                    filteredEvents: filtered,
-                });
+            async searchEvents(query) {
+                try {
+                    const response = await fetch(`/api/events/search?q=${encodeURIComponent(query)}`);
+                    const data = await response.json();
+                    this.setState({
+                        searchQuery: query,
+                        filteredEvents: data.events,
+                    });
+                } catch (error) {
+                    console.error('Search failed:', error);
+                }
             }
 
-            selectEvent(event) {
-                this.setState({
-                    selectedEvent: event,
-                    screen: 'route-preview',
-                    navigationSequence: this.mockData.navigationSequences[event.id] || [],
-                });
+            async selectEvent(event) {
+                try {
+                    const response = await fetch(`/api/navigation/${event.id}`);
+                    const data = await response.json();
+                    this.setState({
+                        selectedEvent: event,
+                        screen: 'route-preview',
+                        navigationSequence: data.sequence || [],
+                    });
+                } catch (error) {
+                    console.error('Failed to load navigation:', error);
+                }
             }
 
             startNavigation() {
