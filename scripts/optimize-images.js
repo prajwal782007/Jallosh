@@ -46,9 +46,15 @@ async function processDirectory(currentDir) {
             const image = sharp(fullPath);
             const metadata = await image.metadata();
 
-            let sharpInstance = image;
-            if (metadata.width > MAX_WIDTH) {
-                sharpInstance = sharpInstance.resize(MAX_WIDTH);
+            let sharpInstance = image.rotate();
+            if (metadata.width > MAX_WIDTH || metadata.height > MAX_WIDTH) {
+                // Resize based on the longest edge to handle portrait images properly
+                sharpInstance = sharpInstance.resize({
+                    width: MAX_WIDTH,
+                    height: MAX_WIDTH,
+                    fit: 'inside',
+                    withoutEnlargement: true
+                });
             }
 
             await sharpInstance.webp({ quality: QUALITY }).toFile(optimizedDestPath);
