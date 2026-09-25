@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jallosh 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+            background: #ffffff;
+            color: #1a1d2e;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #app {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HOME SCREEN ===== */
+        .screen-home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            padding: 2rem 1.5rem;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            z-index: 2;
+        }
+
+        .home-brand {
+            margin-bottom: 3rem;
+        }
+
+        .home-icon {
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .home-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #1a1d2e;
+        }
+
+        .home-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .home-meta {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 3rem;
+        }
+
+        .home-cta {
+            width: 100%;
+            max-width: 280px;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(135deg, #5b5ce6 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+            letter-spacing: -0.01em;
+        }
+
+        .home-cta:active {
+            transform: scale(0.98);
+        }
+
+        .home-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, rgba(79, 70, 229, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        /* ===== NAVIGATION SCREEN ===== */
+        .screen-nav {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+
+        .nav-header {
+            background: white;
+            border-bottom: 1px solid #efefef;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-back-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-back-btn:active {
+            background: #e5e7eb;
+        }
+
+        .nav-header-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1a1d2e;
+        }
+
+        .nav-progress {
+            margin-left: auto;
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        /* ===== EVENTS SCREEN ===== */
+        .screen-events {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+
+        .events-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .search-box {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            z-index: 10;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1.125rem;
+            pointer-events: none;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.125rem;
+            padding: 0.25rem;
+            transition: all 0.2s ease;
+            display: none;
+        }
+
+        .search-input.has-value ~ .search-clear {
+            display: block;
+        }
+
+        .search-clear:active {
+            color: #4f46e5;
+        }
+
+        .events-list-header {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .event-card {
+            background: white;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 0.875rem;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .event-card:active {
+            transform: scale(0.98);
+            border-color: #4f46e5;
+            background: #fafbff;
+        }
+
+        .event-info h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1a1d2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-arrow {
+            color: #d1d5db;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .event-card:active .event-arrow {
+            color: #4f46e5;
+            transform: translateX(2px);
+        }
+
+        .event-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #6b7280;
+        }
+
+        .event-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-empty-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ===== ROUTE PREVIEW ===== */
+        .screen-route {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .screen-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #1a1d2e;
+            letter-spacing: -0.01em;
+        }
+
+        .route-location-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9ff 100%);
+            border: 1.5px solid #e5e7eb;
+            border-radius: 0.875rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        .route-location-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .route-location-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1d2e;
+        }
+
+        .route-steps {
+            margin-bottom: 2.5rem;
+        }
+
+        .route-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .route-marker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5 0%, #5b5ce6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .route-step-text {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            color: #1a1d2e;
+            font-weight: 500;
+        }
+
+        .route-connector {
+            margin-left: 16px;
+            width: 2px;
+            height: 12px;
+            background: #d1d5db;
+            margin-bottom: 0.75rem;
+        }
+
+        .start-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #5b5ce6 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+            letter-spacing: -0.01em;
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== NAVIGATION ===== */
+        .screen-navigation {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fafb;
+        }
+
+        .nav-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-container {
+            flex: 1;
+            background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        .photo-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .photo-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .direction-indicator {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-12px); }
+        }
+
+        .nav-controls {
+            background: white;
+            border-top: 1px solid #efefef;
+            padding: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.back {
+            background: #f3f4f6;
+            color: #1a1d2e;
+        }
+
+        .nav-btn.back:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.back:active:not(:disabled) {
+            background: #e5e7eb;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #5b5ce6 0%, #4f46e5 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-btn.next:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== ARRIVAL ===== */
+        .screen-arrival {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .arrival-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
+        }
+
+        .arrival-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #1a1d2e;
+            letter-spacing: -0.01em;
+        }
+
+        .arrival-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .arrival-info {
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 0.875rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .arrival-info-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .arrival-info-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a1d2e;
+        }
+
+        .arrival-btn {
+            width: 100%;
+            max-width: 280px;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(135deg, #5b5ce6 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+            letter-spacing: -0.01em;
+        }
+
+        .arrival-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .home-title {
+                font-size: 2.5rem;
+            }
+
+            .screen-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        /**
+         * JALLOSH 2026 - EVENTS-FIRST ARCHITECTURE
+         * 
+         * User Flow:
+         * Home → All Events (Searchable) → Route Preview → Navigation → Arrival
+         * 
+         * No building/floor selection needed - user discovers via event search
+         */
+
+        class JalloshApp {
+            constructor() {
+                this.state = {
+                    screen: 'home',
+                    selectedEvent: null,
+                    navigationStep: 0,
+                    searchQuery: '',
+                    allEvents: [],
+                    filteredEvents: [],
+                    navigationSequence: [],
+                };
+
+                // Mock data - Replace with real API calls
+                this.mockData = {
+                    allEvents: [
+                        { 
+                            id: 'E-1', 
+                            name: 'Talvad Vadan', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Classical music performance',
+                            locationPath: 'building-a/floor-2/E-1'
+                        },
+                        { 
+                            id: 'E-2', 
+                            name: 'Swarvadh Vadan', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Vocal performance showcase',
+                            locationPath: 'building-a/floor-2/E-2'
+                        },
+                        { 
+                            id: 'E-3', 
+                            name: 'Natya Sangit', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Dance and music fusion',
+                            locationPath: 'building-a/floor-2/E-3'
+                        },
+                        { 
+                            id: 'E-4', 
+                            name: 'Shastriya Gayan', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Classical vocal training',
+                            locationPath: 'building-a/floor-2/E-4'
+                        },
+                        { 
+                            id: 'E-5', 
+                            name: 'Vadvivad', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Debate and discussion forum',
+                            locationPath: 'building-a/floor-2/E-5'
+                        },
+                        { 
+                            id: 'E-6', 
+                            name: 'Prashnamanjusha', 
+                            buildingId: 'A',
+                            buildingName: 'Building A',
+                            floorNumber: 2,
+                            description: 'Question and answer session',
+                            locationPath: 'building-a/floor-2/E-6'
+                        },
+                    ],
+                    navigationSequences: {
+                        'E-3': [
+                            { type: 'building', label: 'Building A Entrance', imagePath: 'building-a/common/entrance' },
+                            { type: 'building', label: 'Building A Corridor', imagePath: 'building-a/common/corridor' },
+                            { type: 'floor', label: 'Floor 2 Staircase', imagePath: 'building-a/floor-2/common/stairs' },
+                            { type: 'floor', label: 'Floor 2 Main Hall', imagePath: 'building-a/floor-2/common/hall' },
+                            { type: 'event', label: 'Event Area', imagePath: 'building-a/floor-2/events/E-3/area' },
+                            { type: 'event', label: 'Event Entrance', imagePath: 'building-a/floor-2/events/E-3/entrance' },
+                        ]
+                    }
+                };
+
+                this.init();
+            }
+
+            async init() {
+                this.state.allEvents = this.mockData.allEvents;
+                this.state.filteredEvents = this.mockData.allEvents;
+                this.render();
+            }
+
+            setState(updates) {
+                this.state = { ...this.state, ...updates };
+                this.render();
+            }
+
+            // ===== NAVIGATION HANDLERS =====
+            goHome() {
+                this.setState({
+                    screen: 'home',
+                    selectedEvent: null,
+                    searchQuery: '',
+                    navigationStep: 0,
+                });
+            }
+
+            goToEvents() {
+                this.setState({
+                    screen: 'events',
+                    searchQuery: '',
+                    filteredEvents: this.state.allEvents,
+                });
+            }
+
+            searchEvents(query) {
+                const filtered = this.state.allEvents.filter(e =>
+                    e.name.toLowerCase().includes(query.toLowerCase())
+                );
+                this.setState({
+                    searchQuery: query,
+                    filteredEvents: filtered,
+                });
+            }
+
+            selectEvent(event) {
+                this.setState({
+                    selectedEvent: event,
+                    screen: 'route-preview',
+                    navigationSequence: this.mockData.navigationSequences[event.id] || [],
+                });
+            }
+
+            startNavigation() {
+                this.setState({
+                    screen: 'navigation',
+                    navigationStep: 0,
+                });
+            }
+
+            nextStep() {
+                if (this.state.navigationStep < this.state.navigationSequence.length - 1) {
+                    this.setState({
+                        navigationStep: this.state.navigationStep + 1,
+                    });
+                } else {
+                    this.setState({ screen: 'arrival' });
+                }
+            }
+
+            previousStep() {
+                if (this.state.navigationStep > 0) {
+                    this.setState({
+                        navigationStep: this.state.navigationStep - 1,
+                    });
+                }
+            }
+
+            // ===== RENDER METHODS =====
+            render() {
+                const html = this.getScreenHTML();
+                document.getElementById('app').innerHTML = html;
+                this.attachListeners();
+            }
+
+            getScreenHTML() {
+                switch (this.state.screen) {
+                    case 'home':
+                        return this.renderHome();
+                    case 'events':
+                        return this.renderEvents();
+                    case 'route-preview':
+                        return this.renderRoutePreview();
+                    case 'navigation':
+                        return this.renderNavigation();
+                    case 'arrival':
+                        return this.renderArrival();
+                    default:
+                        return this.renderHome();
+                }
+            }
+
+            renderHome() {
+                return `
+                    <div class="screen-home">
+                        <div></div>
+                        <div class="home-content">
+                            <div class="home-brand">
+                                <div class="home-icon">✨</div>
+                                <h1 class="home-title">Jallosh<br/>2026</h1>
+                                <p class="home-subtitle">Find your event</p>
+                                <p class="home-meta">Indoor visual navigation</p>
+                            </div>
+                            <button class="home-cta" data-action="go-to-events">
+                                Find an Event
+                            </button>
+                        </div>
+                        <div class="home-divider"></div>
+                    </div>
+                `;
+            }
+
+            renderEvents() {
+                const eventsHTML = this.state.filteredEvents.map(e => `
+                    <div class="event-card" data-action="select-event" data-event='${JSON.stringify(e)}'>
+                        <div class="event-info">
+                            <h3>${e.name}</h3>
+                            <div class="event-meta">
+                                <span>📍</span>
+                                <span>${e.buildingName} • Floor ${e.floorNumber}</span>
+                            </div>
+                        </div>
+                        <div class="event-arrow">›</div>
+                    </div>
+                `).join('');
+
+                const emptyHTML = this.state.filteredEvents.length === 0 ? `
+                    <div class="event-empty">
+                        <div class="event-empty-icon">🔍</div>
+                        <p class="event-empty-text">
+                            ${this.state.searchQuery ? 'No events match your search' : 'No events available'}
+                        </p>
+                    </div>
+                ` : '';
+
+                return `
+                    <div class="screen-nav">
+                        <div class="nav-header">
+                            <button class="nav-back-btn" data-action="go-home">←</button>
+                            <h2 class="nav-header-title">${this.state.filteredEvents.length} Events</h2>
+                        </div>
+                        <div class="events-container">
+                            <div class="search-box">
+                                <div class="search-input-wrapper">
+                                    <span class="search-icon">🔍</span>
+                                    <input 
+                                        type="text" 
+                                        class="search-input ${this.state.searchQuery ? 'has-value' : ''}" 
+                                        placeholder="Search events..."
+                                        value="${this.state.searchQuery}"
+                                        data-action="search-events"
+                                    />
+                                    <button class="search-clear" data-action="clear-search">✕</button>
+                                </div>
+                            </div>
+                            <div class="events-list-header">Tap to navigate</div>
+                            ${eventsHTML || emptyHTML}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderRoutePreview() {
+                const event = this.state.selectedEvent;
+
+                const stepsHTML = [
+                    { num: 1, text: `${event.buildingName}` },
+                    { num: 2, text: `Floor ${event.floorNumber}` },
+                    { num: 3, text: event.name },
+                ].map(step => `
+                    <div class="route-step">
+                        <div class="route-marker">${step.num}</div>
+                        <div class="route-step-text">${step.text}</div>
+                    </div>
+                    ${step.num < 3 ? '<div class="route-connector"></div>' : ''}
+                `).join('');
+
+                return `
+                    <div class="screen-nav">
+                        <div class="nav-header">
+                            <button class="nav-back-btn" data-action="go-to-events">←</button>
+                            <h2 class="nav-header-title">Route Preview</h2>
+                        </div>
+                        <div class="screen-route">
+                            <h2 class="screen-title">${event.name}</h2>
+                            
+                            <div class="route-location-box">
+                                <div class="route-location-label">Location</div>
+                                <div class="route-location-text">${event.buildingName} • Floor ${event.floorNumber}</div>
+                            </div>
+
+                            <h3 class="route-location-label">Your route</h3>
+                            <div class="route-steps">
+                                ${stepsHTML}
+                            </div>
+
+                            <button class="start-btn" data-action="start-navigation">
+                                Start Navigation
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderNavigation() {
+                const step = this.state.navigationStep;
+                const total = this.state.navigationSequence.length;
+                const current = this.state.navigationSequence[step];
+                const progress = ((step + 1) / total) * 100;
+                const event = this.state.selectedEvent;
+
+                return `
+                    <div class="screen-navigation">
+                        <div class="nav-header">
+                            <button class="nav-back-btn" data-action="go-home">←</button>
+                            <h2 class="nav-header-title">${event.buildingName}</h2>
+                            <div class="nav-progress">${step + 1}/${total}</div>
+                        </div>
+
+                        <div class="nav-main">
+                            <div style="width: 100%; height: 3px; background: #e5e7eb; position: relative;">
+                                <div style="height: 100%; background: linear-gradient(90deg, #5b5ce6 0%, #4f46e5 100%); width: ${progress}%; transition: width 0.3s ease;"></div>
+                            </div>
+
+                            <div class="photo-container">
+                                <div class="photo-placeholder">
+                                    <div class="photo-emoji">📍</div>
+                                    <div class="photo-label">${current.label}</div>
+                                </div>
+                                <div class="direction-indicator">↓</div>
+                            </div>
+                        </div>
+
+                        <div class="nav-controls">
+                            <button class="nav-btn back" data-action="previous-step" ${step === 0 ? 'disabled' : ''}>
+                                Back
+                            </button>
+                            <button class="nav-btn next" data-action="next-step">
+                                ${step === total - 1 ? 'Arrive' : 'Continue'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderArrival() {
+                const event = this.state.selectedEvent;
+
+                return `
+                    <div class="screen-arrival">
+                        <div class="arrival-icon">✓</div>
+                        <h1 class="arrival-title">You've arrived</h1>
+                        <p class="arrival-subtitle">${event.name}</p>
+
+                        <div class="arrival-info">
+                            <div class="arrival-info-label">Location</div>
+                            <div class="arrival-info-text">${event.buildingName} • Floor ${event.floorNumber}</div>
+                        </div>
+
+                        <button class="arrival-btn" data-action="go-to-events">
+                            Find Another Event
+                        </button>
+                    </div>
+                `;
+            }
+
+            // ===== EVENT LISTENERS =====
+            attachListeners() {
+                document.querySelectorAll('[data-action="go-home"]').forEach(el => {
+                    el.addEventListener('click', () => this.goHome());
+                });
+
+                document.querySelectorAll('[data-action="go-to-events"]').forEach(el => {
+                    el.addEventListener('click', () => this.goToEvents());
+                });
+
+                document.querySelectorAll('[data-action="select-event"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const event = JSON.parse(el.getAttribute('data-event'));
+                        this.selectEvent(event);
+                    });
+                });
+
+                document.querySelectorAll('[data-action="search-events"]').forEach(el => {
+                    el.addEventListener('input', (e) => {
+                        this.searchEvents(e.target.value);
+                    });
+                });
+
+                document.querySelectorAll('[data-action="clear-search"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        this.searchEvents('');
+                    });
+                });
+
+                document.querySelectorAll('[data-action="start-navigation"]').forEach(el => {
+                    el.addEventListener('click', () => this.startNavigation());
+                });
+
+                document.querySelectorAll('[data-action="next-step"]').forEach(el => {
+                    el.addEventListener('click', () => this.nextStep());
+                });
+
+                document.querySelectorAll('[data-action="previous-step"]').forEach(el => {
+                    el.addEventListener('click', () => this.previousStep());
+                });
+            }
+        }
+
+        // Initialize
+        new JalloshApp();
+    </script>
+</body>
+</html>
