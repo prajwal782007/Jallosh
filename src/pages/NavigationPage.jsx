@@ -85,10 +85,10 @@ export default function NavigationPage() {
   const currentNode = route?.nodes?.[currentStep] ?? null;
   const isLastStep = currentStep >= totalSteps - 1;
 
-  // Preload next 3 images
+  // Preload next images
   useEffect(() => {
     if (!route?.nodes) return;
-    const nextNodes = route.nodes.slice(currentStep + 1, currentStep + 4);
+    const nextNodes = route.nodes.slice(currentStep + 1, currentStep + 3);
     nextNodes.forEach(node => {
       if (node?.image) {
         const img = new Image();

@@ -10,6 +10,7 @@ export default function NavigationImage({ node, animDirection, className = '' })
   const [prevImage, setPrevImage] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (node?.image && node.image !== currentImage) {
@@ -17,6 +18,7 @@ export default function NavigationImage({ node, animDirection, className = '' })
       setCurrentImage(node.image);
       setIsAnimating(true);
       setHasError(false);
+      setIsLoading(true);
       
       const timer = setTimeout(() => {
         setIsAnimating(false);
@@ -51,9 +53,9 @@ export default function NavigationImage({ node, animDirection, className = '' })
     return (
       <div className={`nav-image-container nav-image-fallback ${className}`} role="img" aria-label={node?.name || 'Navigation location'}>
         <div className="nav-image-fallback-content">
-          <span className="nav-image-fallback-icon">{nodeTypeIcons[node?.nodeType] || '📍'}</span>
-          <span className="nav-image-fallback-label">{hasError ? 'Image unavailable' : (node?.name || 'Unknown location')}</span>
-          <span className="nav-image-fallback-type">{nodeTypeLabels[node?.nodeType] || node?.nodeType}</span>
+          <span className="nav-image-fallback-icon">{hasError ? '⚠️' : (nodeTypeIcons[node?.nodeType] || '📍')}</span>
+          <span className="nav-image-fallback-label">{hasError ? 'Unable to load navigation image.' : (node?.name || 'Unknown location')}</span>
+          {!hasError && <span className="nav-image-fallback-type">{nodeTypeLabels[node?.nodeType] || node?.nodeType}</span>}
         </div>
       </div>
     );
@@ -61,12 +63,22 @@ export default function NavigationImage({ node, animDirection, className = '' })
 
   return (
     <div className={`nav-image-container ${className}`}>
+      {isLoading && (
+        <div className="nav-image-loading">
+          <div className="nav-image-spinner" />
+        </div>
+      )}
+
       {/* New Image (Bottom) */}
       <img
         src={currentImage}
         alt={node?.name || 'Navigation photograph'}
         className="nav-image new-image"
-        onError={() => setHasError(true)}
+        onLoad={() => setIsLoading(false)}
+        onError={() => {
+          setHasError(true);
+          setIsLoading(false);
+        }}
       />
 
       {/* Old Image (Top) fading out and zooming */}

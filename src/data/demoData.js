@@ -116,7 +116,7 @@ export function getRouteForEvent(eventId) {
     nodes.push({
       id: `b-a-common-${i}`,
       name: i === 1 ? 'Building A Entrance' : 'Building Route',
-      image: `/navigation/building-a/common/B-A.img${i}.jpeg`,
+      image: `/navigation-optimized/building-a/common/B-A.img${i}.webp`,
       direction: null,
       instruction: null
     });
@@ -127,7 +127,7 @@ export function getRouteForEvent(eventId) {
     nodes.push({
       id: `b-a-f-2-common-${i}`,
       name: i === 1 ? 'Floor 2' : 'Floor 2 Route',
-      image: `/navigation/building-a/floor-2/common/B-A.F-2.img${i}.jpeg`,
+      image: `/navigation-optimized/building-a/floor-2/common/B-A.F-2.img${i}.webp`,
       direction: null,
       instruction: null
     });
@@ -147,7 +147,7 @@ export function getRouteForEvent(eventId) {
     nodes.push({
       id: `b-a-f-2-${eventId}-${i}`,
       name: i === eventImageCount ? `Arrive at ${event.name}` : `${event.name} Route`,
-      image: `/navigation/building-a/floor-2/events/${eventFolder}/B-A.F-2.${eventId}.img${i}.jpeg`,
+      image: `/navigation-optimized/building-a/floor-2/events/${eventFolder}/B-A.F-2.${eventId}.img${i}.webp`,
       direction: null,
       instruction: null
     });
