@@ -947,10 +947,19 @@
                             </div>
 
                             <div class="photo-container">
-                                <div class="photo-placeholder">
-                                    <div class="photo-emoji">📍</div>
-                                    <div class="photo-label">${current.label}</div>
-                                </div>
+                                ${current.imagePath ? `
+                                    <img src="/${current.imagePath}" alt="${current.label}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <div class="photo-placeholder" style="display: none;">
+                                        <div class="photo-emoji">📍</div>
+                                        <div class="photo-label">${current.label}</div>
+                                    </div>
+                                ` : `
+                                    <div class="photo-placeholder">
+                                        <div class="photo-emoji">📍</div>
+                                        <div class="photo-label">${current.label}</div>
+                                    </div>
+                                `}
+                                <div class="direction-indicator">↑</div>
                                 <div class="direction-indicator">↓</div>
                             </div>
                         </div>
